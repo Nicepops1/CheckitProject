@@ -1,7 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 class Forum(models.Model):
-    avtorID = models.IntegerField()
+    avtorID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
     title = models.CharField(max_length=150)
     content = models.TextField()
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
@@ -17,7 +18,7 @@ class Forum(models.Model):
         
 
 class Otvet(models.Model):
-    avtorID=models.IntegerField()
+    avtorID=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
     postID= models.ForeignKey(Forum, on_delete=models.CASCADE)
     content = models.TextField()
     creattime = models.DateTimeField(auto_now_add=True)
@@ -30,3 +31,16 @@ class Category(models.Model):
 
     def __str__ (self):
         return self.title
+
+
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
+    content = models.TextField()
+    city = models.CharField(max_length=150)
+
+    def __str__(self):
+        return 'Profile for user {}'.format(self.user.username)
