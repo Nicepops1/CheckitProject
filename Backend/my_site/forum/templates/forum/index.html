@@ -15,6 +15,12 @@
     <p>Название: {{i.title}}</p>
     <p>содержание: <br /> {{i.content}}</p>
     <p>время создания: {{i.creattime |date:"d.m.y H:i"}}</p>
+    <p>Название: {{i.photo}}</p>
+    <div class="media">
+        {% if i.photo %}
+            <img src="{{i.photo.url}}" alt="">
+        {%endif%}
+    </div>
 
 </div>
 <hr />
