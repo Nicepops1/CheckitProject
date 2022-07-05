@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .models import Forum
-from .models import Otvet
+from .models import Post
+from .models import Coment
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 
 def index(request):
-    forumdate=Forum.objects.order_by('-creattime')
-    otvetdate = Otvet.objects.order_by('-creattime')
+    forumdate=Post.objects.order_by('-creattime')
+    otvetdate = Coment.objects.order_by('-creattime')
     context= {
         'forum':forumdate, 
         'otvet':otvetdate
