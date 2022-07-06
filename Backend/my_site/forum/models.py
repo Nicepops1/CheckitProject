@@ -15,6 +15,8 @@ class Post(models.Model):
     like= models.IntegerField(default=0)
     unlike= models.IntegerField(default=0)
     publik = models.BooleanField(blank=True, default=False)
+    adresmark=models.CharField(max_length=150, null=True)
+    cordmark=models.CharField(max_length=150, null=True)
 
     def __str__ (self):
         return self.title
