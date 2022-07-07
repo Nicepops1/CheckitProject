@@ -9,7 +9,7 @@
 
 <h1>Форум</h1>
 
-{% for i in forum %}
+{% for i in Post %}
 
 <div>
     <p>Название: {{i.title}}</p>
@@ -28,7 +28,7 @@
 
 <h1>Ответы</h1>
 
-{% for i in otvet %}
+{% for i in Coment %}
 
 <div>
     <p>{{i.content}}</p>
