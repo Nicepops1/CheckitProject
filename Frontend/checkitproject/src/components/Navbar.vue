@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <div class="left-side-components">
-            <img class="globe" src="../assets/icons/internet-svgrepo-com.svg" alt="">
+            <img class="globe" src="../assets/img/icons/internet-svgrepo-com.svg" alt="">
             <div class="text">
                 <span>Достопримечательности</span>
                 <span>России</span>
@@ -12,7 +12,7 @@
             <div @click="$router.push('/map')" class="reference">Карта</div>
             <div @click="$router.push('/addplace')" class="reference">Добавить место</div>
             <div @click="$router.push('/signup')" class="reference">Регистрация</div>
-            <div @click="$router.push('/signin')" class="reference enter-btn"><img src="../assets/icons/user_icon_179525.svg" alt="#"><span style="margin-left: .4rem">Войти</span></div>
+            <div @click="$router.push('/signin')" class="reference enter-btn"><img src="../assets/img/icons/user_icon_179525.svg" alt="#"><span style="margin-left: .4rem">Войти</span></div>
         </div>
     </div>
 </template>
@@ -31,7 +31,8 @@ export default{
 @import url('../assets/fonts/fonts.css');
 
 .navbar{
-    position: absolute;
+    position: sticky;
+    top: 0rem;
     min-width: 100%;
     height: 3.75rem;
     border-bottom: 2px grey solid;

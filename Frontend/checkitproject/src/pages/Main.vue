@@ -24,6 +24,12 @@ export default{
     padding: 0;
     box-sizing: border-box;
 }
+.fullpage{
+    position: absolute;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100vh - 3.75rem);
+}
 .bground-btn{
     width: 100%;
     height: 60rem;
@@ -32,7 +38,6 @@ export default{
     background: url('../assets/img/BMain.jpg');
     background-size: cover;
     background-size: 120rem 60rem;
-    margin-top: 3.75rem;
     border-bottom: 2px grey solid;
     padding-bottom: 1rem;
 }
