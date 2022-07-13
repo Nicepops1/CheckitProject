@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('forum.urls')),
     path('map/',include('forum.urls') ),
-
+    path('auth/',include('djoser.urls')),
+     path('auth/',include('djoser.urls.authtoken')),
     path('forum/', include('forum.urls')),
    
 ]
