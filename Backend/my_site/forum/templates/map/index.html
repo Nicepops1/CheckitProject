@@ -1,25 +1,38 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Карта</title>
-    <!--9edeaecb-5b0a-4af8-b9f4-b7512a1c2bfa-->
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=<ваш API-ключ>" type="text/javascript"></script>
-    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
-    <script src="js/mark.js" type="text/javascript"></script>
+    <title>2гис карта</title>
+
     <style>
-        html, body, #map {
+        html,
+        body,
+        #container {
+            margin: 0;
             width: 100%;
             height: 100%;
-            padding: 0;
-            margin: 0;
+            overflow: hidden;
         }
 
-      
+        #tooltip {
+            padding: 20px 40px;
+            background: #fff;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            display: none;
+            position: fixed;
+            pointer-events: none;
+        }
     </style>
+
 </head>
 <body>
-    <div id="map"></div>
+    
+    <div id="container"></div>
+    <div id="tooltip">Hello, world!</div>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+    <script src="js/mark.js" type="text/javascript"></script>
+
 </body>
 </html>
