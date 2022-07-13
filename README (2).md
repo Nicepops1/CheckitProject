@@ -17,3 +17,5 @@
 5) в консоли прописать команду "python manage.py runserver" после чего перейти на IP сервера (!Важно! сочетание клавишь ctrl+С в консоли выключит сервер) 
 
 
+(pip install django-rest-knox)
+( pip install Pillow)
