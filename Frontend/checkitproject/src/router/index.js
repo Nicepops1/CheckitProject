@@ -3,6 +3,7 @@ import Map from '@/pages/Map'
 import AddPlace from '@/pages/AddPlace'
 import SignIn from '@/pages/SignIn'
 import SignUp from '@/pages/SignUp'
+import Account from '@/pages/Account'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/signup',
     component: SignUp
+  },
+  {
+    path: '/account',
+    component : Account
   }
 ]
 
