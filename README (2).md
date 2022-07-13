@@ -4,6 +4,7 @@
 *pip install django*
 *pip install django_2gis_maps*
 *pip install djoser*
+*pip install djangorestframework-simplejwt*
 *Пошаговый запуск*
 1) при помощи констольной команды cd открыть папку (Backend/my_site).
 2) В консоли ввести команду "python manage.py makemigrations".
