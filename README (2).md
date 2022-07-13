@@ -1,7 +1,9 @@
 # GardeningProject Backend
 *программы:*
 1.django 4.0.4 или выше;
+*pip install django*
 *pip install django_2gis_maps*
+*pip install djoser*
 *Пошаговый запуск*
 1) при помощи констольной команды cd открыть папку (Backend/my_site).
 2) В консоли ввести команду "python manage.py makemigrations".
