@@ -15,6 +15,11 @@ class ForumView(APIView):
         profiles = Profile.objects.all()
         serializers = ProfilSerializer(profiles, many=True)
         return Response (serializers.data)
+    def post(self, request):
+        profile = ProfilSerializer(data=request.data)
+        if profile.is_valid():
+            profile.save()
+        return Response (status=201)
 
 def index(request):
     forumdate=Post.objects.order_by('-creattime')
