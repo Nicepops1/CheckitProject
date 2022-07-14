@@ -6,6 +6,7 @@
 *pip install djoser*
 *pip install djangorestframework-simplejwt*
 *pip install djangorestframework*
+*pip install cors*
 *Пошаговый запуск*
 1) при помощи констольной команды cd открыть папку (Backend/my_site).
 2) В консоли ввести команду "python manage.py makemigrations".
