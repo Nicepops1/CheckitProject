@@ -22,9 +22,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('forum.urls')),
-    path('map/',include('forum.urls') ),
+    path('map/',include('forum.urls')),
     path('auth/',include('djoser.urls')),
-     path('auth/',include('djoser.urls.authtoken')),
+    path('auth/',include('djoser.urls.authtoken')),
+    path('auth', include('djoser.urls.jwt')),
     path('forum/', include('forum.urls')),
    
 ]
