@@ -3,8 +3,8 @@
         <form action="">
             <h1 class="label">Регистрация</h1>
             <p class="hint">ИМЯ ПОЛЬЗОВАТЕЛЯ</p>
-            <input type="text" class="form-input">
-            <p class="hint">E-MAIL</p>
+            <input v-bind:value="Nickname" @input="inputNickname" type="text" class="form-input">
+            <p class="hint">ЛОГИН</p>
             <input type="text" class="form-input">
             <p class="hint">ПАРОЛЬ</p>
             <input type="password" class="form-input">
@@ -16,7 +16,57 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default{
+
+    data() {
+        return {
+            Nickname : '',
+            Login : '',
+            Password : '',
+        }
+    },
+    methods : {
+        Register() {
+            if (this.Username.length>12) {
+                alert("Логин не должен быть длинее 12 символов!")
+            }else if (this.Username.length<4){
+                alert("Логин не должен быть короче 4 символов!")
+            }else {
+                $.ajax({
+                url: "http://127.0.0.1:8000/auth/users/",
+                type: "POST",
+                data: {
+                    username: this.Username,
+                    password: this.Password
+                },
+                headers:{
+                        "Access-Control-Allow-Origin" : '*',
+                },
+                success: () => {
+                    this.Login()
+                },
+                error: (data) => {
+                    if (data.responseJSON.password) {
+                    alert(data.responseJSON.password[0])
+                    } else if (data.responseJSON.username) {
+                    alert(data.responseJSON.username[0])
+                    }
+                }
+                })
+            }
+        },
+        inputNickname(event) {
+            this.Nickname = event.target.value;
+        },
+        inputUsername(event) {
+            this.Username = event.target.value;
+        },
+        inputPassword(event){
+            this.Password = event.target.value;
+        },
+
+    }
 
 }
 

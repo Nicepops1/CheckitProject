@@ -20,25 +20,27 @@ export default{
         };
     },
     methods: {
-        Login() {
-            $.ajax({
-                url : 'http://127.0.0.1:8000/auth/token/login',
-                type : 'POST',
-                data : {
-                    username : this.Username,
-                    password : this.Password
+            Login() {
+                $.ajax({
+                    url: "http://127.0.0.1:8000/auth/token/login/",
+                    type: "POST",
+                    data: {
+                    username: this.Username,
+                    password: this.Password
+                    },
+                    headers:{
+                        "Access-Control-Allow-Origin" : '*',
+                    },
+                    success: (response) => {
+                        this.Token = response.auth_token
+                        sessionStorage.setItem("AuthToken", this.Token)
+                        sessionStorage.setItem("Username", this.Username)
+                    },
+                    error: (data) => {
+                        alert(data.responseJSON.non_field_errors[0])
+                    }
+                })
                 },
-                success : (response) => {
-                    this.Token = response.auth_token
-                    sessionStorage.setItem('AuthToken', this.Token)
-                    sessionStorage.setItem('Username', this.Username)
-                    // this.$router.push('/account')
-                },
-                error: (data) => {
-                    alert(data.responseJson.non_field_errors[0])
-                }
-            })
-        },
     inputUsername(event) {
         this.Username = event.target.value;
     },
