@@ -5,7 +5,7 @@ class Post(models.Model):
     avtorID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
     title = models.CharField(max_length=150)
     content = models.TextField()
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
+    photo = models.ImageField(upload_to='photos', blank=True, null=True)
     creattime = models.DateTimeField(auto_now_add=True)
     updatetime = models.DateTimeField(auto_now=True)
     city = models.ForeignKey('Citys', on_delete=models.PROTECT, null=True)
@@ -30,7 +30,7 @@ class Coment(models.Model):
     postID= models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     creattime = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(upload_to='userphoto/%Y/%m/%d/', blank=True, null=True)
+    photo = models.ImageField(upload_to='userphoto', blank=True, null=True)
 
     def __str__ (self):
         return self.content
@@ -48,7 +48,7 @@ class Citys(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
-    photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True, null=True)
+    photo = models.ImageField(upload_to='users', blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=150, blank=True, null=True)
     rating = models.IntegerField(default=0)
