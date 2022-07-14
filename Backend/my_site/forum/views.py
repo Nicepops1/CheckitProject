@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from .serializers import ProfilSerializer
 from .models import Post
+from .models import Profile
 from .models import Coment
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+
+class ForumView(APIView):
+    def get(self, request):
+        profiles = Profile.objects.all()
+        serializers = ProfilSerializer(profiles, many=True)
+        return Response (serializers.data)
 
 def index(request):
     forumdate=Post.objects.order_by('-creattime')
