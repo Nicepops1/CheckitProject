@@ -52,6 +52,7 @@ class Profile(models.Model):
     content = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=150, blank=True, null=True)
     rating = models.IntegerField(default=0)
+    user_name= models.CharField(max_length=150, blank=True, null=True)
 
     def __str__(self):
         return 'Profile for user {}'.format(self.user.username)
