@@ -23,3 +23,7 @@ class ProfilSerializer(serializers.ModelSerializer):
         model= Profile
         fields = '__all__'
 
+class CoordinatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Coordinat
+        fields = '__all__'

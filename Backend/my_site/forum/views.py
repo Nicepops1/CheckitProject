@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .serializers import ProfilSerializer
+from .serializers import ProfilSerializer, CoordinatSerializer
 from .models import Post
 from .models import Profile
 from .models import Coment
+from .models import Coordinat
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from rest_framework.views import APIView
@@ -17,6 +18,17 @@ class ForumView(APIView):
         return Response (serializers.data)
     def post(self, request):
         profile = ProfilSerializer(data=request.data)
+        if profile.is_valid():
+            profile.save()
+        return Response (status=201)
+
+class CoordView(APIView):
+    def get(self, request):
+        profiles = Coordinat.objects.all()
+        serializers = CoordinatSerializer(profiles, many=True)
+        return Response (serializers.data)
+    def post(self, request):
+        profile = CoordinatSerializer(data=request.data)
         if profile.is_valid():
             profile.save()
         return Response (status=201)

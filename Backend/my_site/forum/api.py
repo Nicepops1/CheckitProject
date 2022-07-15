@@ -1,6 +1,6 @@
 from .models import *
 from rest_framework import viewsets, permissions
-from .serializers import PostSerializer
+from .serializers import PostSerializer,  ComentSerializer, CitysSerializer, ProfilSerializer, CoordinatSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -15,18 +15,27 @@ class ComentViewSet(viewsets.ModelViewSet):
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = PostSerializer
+    serializer_class = ComentSerializer
 
 class CitysViewSet(viewsets.ModelViewSet):
     queryset = Citys.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = PostSerializer
+    serializer_class = CitysSerializer
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = PostSerializer
+    serializer_class = ProfilSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Coordinat.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CoordinatSerializer
+

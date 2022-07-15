@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework import routers
 from .api import *
 from .views import ForumView
+from .views import CoordView
 
 from .views import *
 
@@ -14,10 +15,12 @@ router.register('api/profile',ProfileViewSet, 'profile')
 urlpatterns = router.urls
 
 app_name = 'profile'
+app_name = 'coord'
 urlpatterns= [
     path('',index),
     path('register/',register, name='register'),
     path('login/',user_login, name='login'),
     path('map/', map, name='map'),
     path('profile/', ForumView.as_view()),
+    path('coord/', CoordView.as_view()),
 ]

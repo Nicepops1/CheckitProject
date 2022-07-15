@@ -16,14 +16,19 @@ class Post(models.Model):
     unlike= models.IntegerField(default=0)
     publik = models.BooleanField(blank=True, default=False)
     adresmark=models.CharField(max_length=150, null=True)
-    cordmark=models.CharField(max_length=150, null=True)
+    
 
     def __str__ (self):
         return self.title
    
     class Meta:
         verbose_name = 'post'
-        
+class Coordinat(models.Model):
+    mesto=models.OneToOneField('Post', on_delete=models.CASCADE)
+    cord_X= models.FloatField(default=37.64)
+    cord_Y= models.FloatField(default=55.76)
+
+
 
 class Coment(models.Model):
     avtorID=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
