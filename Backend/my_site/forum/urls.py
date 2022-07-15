@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework import routers
 from .api import *
-from .views import ForumView
+from .views import ForumView, ComentView, PostView, CitysView
 from .views import CoordView
 
 from .views import *
@@ -23,4 +23,7 @@ urlpatterns= [
     path('map/', map, name='map'),
     path('profile/', ForumView.as_view()),
     path('coord/', CoordView.as_view()),
+    path('coment/', ComentView.as_view()),
+    path('post/', PostView.as_view()),
+    path('citys/', CitysView.as_view()),
 ]
