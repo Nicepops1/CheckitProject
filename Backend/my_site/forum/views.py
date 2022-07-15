@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .serializers import ProfilSerializer, CoordinatSerializer
+from .serializers import ProfilSerializer, CoordinatSerializer, PostSerializer, CitysSerializer, ComentSerializer
 from .models import Post
 from .models import Profile
 from .models import Coment
 from .models import Coordinat
+from .models import Citys
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from rest_framework.views import APIView
@@ -13,7 +14,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAu
 
 
 class ForumView(APIView):
-    permission_classes = IsAuthenticated, )
+    permission_classes =( IsAuthenticated, )
     def get(self, request):
         profiles = Profile.objects.all()
         serializers = ProfilSerializer(profiles, many=True)
@@ -36,7 +37,41 @@ class CoordView(APIView):
             coord.save()
         return Response (status=201)
 
+class PostView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    def get(self, request):
+        postss = Post.objects.all()
+        serializers = PostSerializer(postss, many=True)
+        return Response (serializers.data)
+    def post(self, request):
+        posts = PostSerializer(data=request.data)
+        if posts.is_valid():
+            posts.save()
+        return Response (status=201)
 
+class ComentView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    def get(self, request):
+        coments = Coment.objects.all()
+        serializers = ComentSerializer(coments, many=True)
+        return Response (serializers.data)
+    def post(self, request):
+        coment = ComentSerializer(data=request.data)
+        if coment.is_valid():
+            coment.save()
+        return Response (status=201)
+
+class CitysView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    def get(self, request):
+        citys = Citys.objects.all()
+        serializers = CitysSerializer(citys, many=True)
+        return Response (serializers.data)
+    def post(self, request):
+        city = ComentSerializer(data=request.data)
+        if city.is_valid():
+            city.save()
+        return Response (status=201)
 
 def index(request):
     forumdate=Post.objects.order_by('-creattime')
