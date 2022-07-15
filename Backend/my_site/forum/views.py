@@ -9,9 +9,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 
 
 class ForumView(APIView):
+    permission_classes = IsAuthenticated, )
     def get(self, request):
         profiles = Profile.objects.all()
         serializers = ProfilSerializer(profiles, many=True)
@@ -23,15 +25,18 @@ class ForumView(APIView):
         return Response (status=201)
 
 class CoordView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     def get(self, request):
-        profiles = Coordinat.objects.all()
-        serializers = CoordinatSerializer(profiles, many=True)
+        coords = Coordinat.objects.all()
+        serializers = CoordinatSerializer(coords, many=True)
         return Response (serializers.data)
     def post(self, request):
-        profile = CoordinatSerializer(data=request.data)
-        if profile.is_valid():
-            profile.save()
+        coord = CoordinatSerializer(data=request.data)
+        if coord.is_valid():
+            coord.save()
         return Response (status=201)
+
+
 
 def index(request):
     forumdate=Post.objects.order_by('-creattime')
@@ -41,6 +46,8 @@ def index(request):
         'Coment':otvetdate
      }
     return render(request, 'forum/index.html',context)
+
+
 def map(request):
     PostMark=Post.objects.order_by('creattime')
     context1= {
