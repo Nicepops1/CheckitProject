@@ -9,8 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "2gis": "^0.0.2",
+    "2gis-maps": "^3.7.1",
+    "axios": "^0.27.2",
     "gulp": "^4.0.2",
-    "vue": "^3.2.37"
+    "jquery": "^3.6.0",
+    "vue": "^3.2.36"
   },
   "devDependencies": {
     "gulp-sass": "^5.1.0",

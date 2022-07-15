@@ -1,5 +1,1 @@
-import django
-
-
-
-
+print(1+1)
