@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Форум</title>
+</head>
+<body>
+
+<h1>Форум</h1>
+
+{% for i in forum %}
+
+<div>
+    <p>Название: {{i.title}}</p>
+    <p>содержание: <br /> {{i.content}}</p>
+    <p>время создания: {{i.creattime |date:"d.m.y H:i"}}</p>
+    <p>Название: {{i.photo}}</p>
+    <div class="media">
+        {% if i.photo %}
+            <img src="{{i.photo.url}}" alt="">
+        {%endif%}
+    </div>
+
+</div>
+<hr />
+{% endfor %}
+
+<h1>Ответы</h1>
+
+{% for i in otvet %}
+
+<div>
+    <p>{{i.content}}</p>
+    <p>{{i.creattime}}</p>
+</div>
+
+{% endfor %}
+
+</body>
+</html>
