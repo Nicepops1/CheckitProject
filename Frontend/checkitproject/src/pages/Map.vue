@@ -26,7 +26,7 @@ data(){
             this.GetPlaces()
             console.log('Работает')
             this.Map = new mapgl.Map('map', {
-                key: '2a029025-d321-4ae6-9296-e7eb69981ea4',
+                key: 'Your Api Key',
                 center: [37.61811, 55.757523],
                 zoom: 10,
             });
