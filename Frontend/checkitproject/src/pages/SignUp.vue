@@ -1,16 +1,14 @@
 <template>
     <div class="container">
-        <form action="">
+        <form @submit.prevent action="">
             <h1 class="label">Регистрация</h1>
             <p class="hint">ИМЯ ПОЛЬЗОВАТЕЛЯ</p>
             <input v-bind:value="Nickname" @input="inputNickname" type="text" class="form-input">
             <p class="hint">ЛОГИН</p>
-            <input type="text" class="form-input">
+            <input v-bind:value="LoginName" @input="inputLogin" type="text" class="form-input">
             <p class="hint">ПАРОЛЬ</p>
-            <input type="password" class="form-input">
-            <p class="hint">ПОВТОРИТЕ ПАРОЛЬ</p>
-            <input type="password" class="form-input">
-            <button class="up-btn">ЗАРЕГИСТРИРОВАТСЯ</button>
+            <input v-bind="Password" @input="inputPassword" type="password" class="form-input">
+            <button @click="Register" class="up-btn">ЗАРЕГИСТРИРОВАТСЯ</button>
         </form>
     </div>
 </template>
@@ -22,22 +20,23 @@ export default{
     data() {
         return {
             Nickname : '',
-            Login : '',
+            LoginName : '',
             Password : '',
+            Id : undefined,
         }
     },
     methods : {
         Register() {
-            if (this.Username.length>12) {
+            if (this.LoginName.length>12) {
                 alert("Логин не должен быть длинее 12 символов!")
-            }else if (this.Username.length<4){
+            }else if (this.LoginName.length<4){
                 alert("Логин не должен быть короче 4 символов!")
             }else {
                 $.ajax({
                 url: "http://127.0.0.1:8000/auth/users/",
                 type: "POST",
                 data: {
-                    username: this.Username,
+                    username: this.LoginName,
                     password: this.Password
                 },
                 headers:{
@@ -56,11 +55,68 @@ export default{
                 })
             }
         },
+        Login() {
+                $.ajax({
+                    url: "http://127.0.0.1:8000/auth/token/login/",
+                    type: "POST",
+                    data: {
+                        username: this.LoginName,
+                        password: this.Password
+                    },
+                    headers:{
+                        "Access-Control-Allow-Origin" : '*',
+                    },
+                    success: (response) => {
+                        this.Token = response.auth_token
+                        sessionStorage.setItem("AuthToken", this.Token)
+                        sessionStorage.setItem("Nickname", this.Nickname)
+                        this.GetId()
+                        this.ChangeNickname()
+                        this.$router.push('/account')
+                    },
+                    error: (data) => {
+                        alert(data.responseJSON.non_field_errors[0])
+                    }
+                })
+                },
+            GetId(){
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/auth/users/me',
+                    type: 'GET',
+                    headers:{
+                        'Authorization' : 'Token' + sessionStorage.getItem('AuthToken'),
+                    },
+                    success: (response) => {
+                        this.Id = response.data.id;
+                        sessionStorage.setItem('Id', this.Id)
+                    },
+                    error: (data) => {
+                        alert(data.responseJSON.non_field_errors[0])
+                    }
+                })
+            },
+            ChangeNickname(){
+                $.ajax({
+                    url : 'http://127.0.0.1:8000/profile/',
+                    type: 'POST',
+                    headers : {
+                            'Authorization' : 'Token' + sessionStorage.getItem('AuthToken'),
+                    },
+                    data: {
+                        user: sessionStorage.getItem('Id'),
+                        user_name : this.Nickname,
+                    },
+                    success: (response) => {},
+                    error : (data) => {
+                        alert(data.responseJSON.non_field_errors[0])
+                    }
+                })
+            },
         inputNickname(event) {
             this.Nickname = event.target.value;
         },
-        inputUsername(event) {
-            this.Username = event.target.value;
+        inputLogin(event) {
+            this.LoginName = event.target.value;
         },
         inputPassword(event){
             this.Password = event.target.value;
@@ -87,6 +143,7 @@ export default{
     font-family: 'FiraSans-Light';
     margin-bottom: 0.9375rem;
     margin-top: 1.875rem;
+    overflow-y: hidden;
 }
 .form-input{
     background: #FFFFFF;
@@ -127,9 +184,6 @@ form{
 }
 
 @media screen and (max-width: 1280px) {
-    .signup-label{
-    font-family: 'FiraSans-Bold';    
-}
 .hint{
     font-family: 'FiraSans-Light';
     margin-bottom: calc(0.9375rem * 2/3);
@@ -168,5 +222,6 @@ form{
     border-radius: 15px;
     margin-top: calc(.9375rem * 2/3);
 }
+
 }
 </style>

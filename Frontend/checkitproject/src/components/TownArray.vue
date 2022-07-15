@@ -1,6 +1,6 @@
 <template>
     <div class="townarray">
-        <h1 class="label">СПИСОК ГОРОДОВ</h1>   
+        <h1 class="label town-label">СПИСОК ГОРОДОВ</h1>   
         <div class="town-container">
             <div class="town-row">
                 <div class="town-card">
@@ -40,9 +40,11 @@
     height: 100vh;
 }
 .label{
+    align-self: center;
+}
+.town-label{
     margin-top: 2rem;
     margin-bottom: 2rem;
-    align-self: center;
 }
 .town-container{
     padding-left: 7.5rem;

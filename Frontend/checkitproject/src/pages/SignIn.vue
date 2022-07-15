@@ -35,6 +35,7 @@ export default{
                         this.Token = response.auth_token
                         sessionStorage.setItem("AuthToken", this.Token)
                         sessionStorage.setItem("Username", this.Username)
+                        this.$router.push('/account')
                     },
                     error: (data) => {
                         alert(data.responseJSON.non_field_errors[0])

@@ -21,6 +21,9 @@ export default{
     overflow-x: hidden;
 }
 .label{
-    font-family: 'FiraSans-Bold';    
+    font-family: 'FiraSans-Bold';
+    height: auto;
+    overflow-y: hidden;
+    margin-bottom: 1rem;
 }
 </style>
